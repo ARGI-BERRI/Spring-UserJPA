@@ -1,19 +1,21 @@
 package dev.argia.userjpa.entity
 
 import jakarta.persistence.*
-import java.util.Date
+import java.util.*
 
 @Entity
 @Table(name = "users")
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
-    @Column(nullable = false)
-    val username: String,
+    var id: Long? = null,
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    var createdAt: Date
+    var createdAt: Date? = null,
+
+    @Column(nullable = false)
+    var username: String,
 ) {
     @PrePersist
     fun preInsert() {

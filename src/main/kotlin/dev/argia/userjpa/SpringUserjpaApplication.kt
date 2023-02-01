@@ -6,15 +6,14 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import java.util.*
 
 @SpringBootApplication
 class SpringUserjpaApplication {
     @Bean
     fun init(repository: UserRepository) = CommandLineRunner {
-        repository.save(User(1, "Alpine", Date()))
-        repository.save(User(2, "Berkley", Date()))
-        repository.save(User(3, "Chester", Date()))
+        repository.save(User(username = "Alpine"))
+        repository.save(User(username = "Berkley"))
+        repository.save(User(username = "Chester"))
     }
 }
 

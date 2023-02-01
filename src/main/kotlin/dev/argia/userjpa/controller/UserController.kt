@@ -3,13 +3,7 @@ package dev.argia.userjpa.controller
 import dev.argia.userjpa.entity.User
 import dev.argia.userjpa.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import java.util.Optional
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
@@ -23,12 +17,18 @@ class UserController {
     }
 
     @GetMapping("/user/{id}")
-    fun getUserById(@PathVariable("id") id: Int?): Optional<User> {
+    fun getUserById(@PathVariable("id") id: Int): User {
         return userService.getUserById(id)
     }
 
     @PostMapping("/user")
     fun createUser(@RequestBody user: User): User {
         return userService.save(user)
+    }
+
+    @DeleteMapping("/user/{id}")
+    fun deleteUser(@PathVariable("id") id: Int) {
+        // FIXME: 存在しないユーザーIDで DELETE を叩くと例外を吐く（死にはしない）
+        return userService.delete(id)
     }
 }
